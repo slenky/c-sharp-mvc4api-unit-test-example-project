@@ -9,7 +9,7 @@
 		<SrcPath>$(RootPath)</SrcPath>
 		<Packages>$(SrcPath)\packages</Packages>
 		<!--This isnt always set. So lets do so!-->
-		<VSToolsPath>$(PROGRAMFILES)\MSBuild\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+		<VSToolsPath>$(PROGRAMFILES)\MSBuild\Microsoft\VisualStudio\v12.0</VSToolsPath>
 	</PropertyGroup>
 	
 	<!-- The Clean Target -->
@@ -40,6 +40,6 @@
 	</Target>
 
 	<!-- The Jenkins Target -->
-	<Target Name="Jenkins" DependsOnTargets="Clean;LoadNuGetPackages;Compile">
+	<Target Name="Jenkins" DependsOnTargets="LoadNuGetPackages;Clean;Compile">
 	</Target>
 </Project>
