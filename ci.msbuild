@@ -12,7 +12,7 @@
 		<VSToolsPath>$(PROGRAMFILES)\MSBuild\Microsoft\VisualStudio\v12.0</VSToolsPath>
 	</PropertyGroup>
 	
-	<UsingTask TaskName="SetEnvironmentVariableTask" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v$(MSBuildToolsVersion).dll">
+	<UsingTask TaskName="SetEnvironmentVariableTask" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
 		<ParameterGroup>
 			<Name ParameterType="System.String" Required="true" />
 			<Value ParameterType="System.String" Required="true" />
