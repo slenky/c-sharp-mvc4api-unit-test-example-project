@@ -12,6 +12,22 @@
 		<VSToolsPath>$(PROGRAMFILES)\MSBuild\Microsoft\VisualStudio\v12.0</VSToolsPath>
 	</PropertyGroup>
 	
+	<UsingTask TaskName="SetEnvironmentVariableTask" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v$(MSBuildToolsVersion).dll">
+		<ParameterGroup>
+			<Name ParameterType="System.String" Required="true" />
+			<Value ParameterType="System.String" Required="true" />
+		</ParameterGroup>
+
+		<Task>
+			<Using Namespace="System" />
+			<Code Type="Fragment" Language="cs">
+			<![CDATA[
+				Environment.SetEnvironmentVariable(Name, Value);
+			]]>
+			</Code>
+		</Task>
+	</UsingTask>
+
 	<!-- The Clean Target -->
 	<ItemGroup>
 		<ProjectFiles Include="**\*.csproj" />
@@ -33,10 +49,14 @@
 		<!-- Exec Command="&quot;$(SrcPath)\.nuget\nuget.exe&quot; install &quot;%(NuGetPackageConfigs.Identity)&quot; -o &quot;$(SrcPath)\packages&quot;" / -->
 	</Target>
 	
+	<Target Name="VSPath" BeforeTargets="Compile">
+  		<SetEnvironmentVariableTask Name="VSToolsPath" Value="$(VSToolsPath)" />
+	</Target>
+
 	<!-- The Compile Target -->
 	<Target Name="Compile" DependsOnTargets="Clean;LoadNuGetPackages">
 		<Message Importance="high" Text="Compiling core projects" />
-		<MSBuild Projects="$(SrcPath)\MvcApplicationTest.sln" Properties="VSToolsPath=$(VSToolsPath)" />	 
+		<MSBuild Projects="$(SrcPath)\MvcApplicationTest.sln" />	 
 	</Target>
 
 	<!-- The Jenkins Target -->
