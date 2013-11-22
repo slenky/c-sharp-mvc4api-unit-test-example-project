@@ -8,25 +8,7 @@
 		<RootPath>$(MSBuildProjectDirectory)</RootPath>
 		<SrcPath>$(RootPath)</SrcPath>
 		<Packages>$(SrcPath)\packages</Packages>
-		<!--This isnt always set. So lets do so!-->
-		<VSToolsPath>$(PROGRAMFILES)\MSBuild\Microsoft\VisualStudio\v12.0</VSToolsPath>
 	</PropertyGroup>
-	
-	<UsingTask TaskName="SetEnvironmentVariableTask" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll">
-		<ParameterGroup>
-			<Name ParameterType="System.String" Required="true" />
-			<Value ParameterType="System.String" Required="true" />
-		</ParameterGroup>
-
-		<Task>
-			<Using Namespace="System" />
-			<Code Type="Fragment" Language="cs">
-			<![CDATA[
-				Environment.SetEnvironmentVariable(Name, Value);
-			]]>
-			</Code>
-		</Task>
-	</UsingTask>
 
 	<!-- The Clean Target -->
 	<ItemGroup>
@@ -52,17 +34,10 @@
 	<!-- The Compile Target -->
 	<Target Name="Compile" DependsOnTargets="Clean;LoadNuGetPackages">
 		<Message Importance="high" Text="Compiling core projects" />
-		<MSBuild Projects="$(SrcPath)\MvcApplicationTest.sln" Properties="VisualStudioVersion=12.0" ToolsVersion="12.0" />
+		<MSBuild Projects="$(SrcPath)\MvcApplicationTest.sln" />
 	</Target>
 
 	<!-- The Jenkins Target -->
 	<Target Name="Jenkins" DependsOnTargets="LoadNuGetPackages;Clean;Compile">
-	</Target>
-	<Target Name="SetEnvironmentVariables" BeforeTargets="Clean; Compile">
-		<Message Text="Loading VS 2013 Variables" />
-		<Exec Command="&quot;$(PROGRAMFILES)\Microsoft Visual Studio 12.0\Common7\Tools\VsDevCmd.bat&quot;" />
-		<SetEnvironmentVariableTask Name="VSToolsPath" Value="$(VSToolsPath)" />
-		<Message Text="Current Environemnt Dump" />
-		<Exec Command="set" IgnoreExitCode="True" />
 	</Target>
 </Project>
