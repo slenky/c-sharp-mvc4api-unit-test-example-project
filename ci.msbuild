@@ -59,9 +59,9 @@
 	<Target Name="Jenkins" DependsOnTargets="LoadNuGetPackages;Clean;Compile">
 	</Target>
 	<Target Name="SetEnvironmentVariables" BeforeTargets="Clean; Compile">
-		<SetEnvironmentVariableTask Name="VSToolsPath" Value="$(VSToolsPath)" />
 		<Message Text="Loading VS 2013 Variables" />
 		<Exec Command="$(PROGRAMFILES)\Microsoft Visual Studio 12.0\Common7\Tools\VsDevCmd.bat" />
+		<SetEnvironmentVariableTask Name="VSToolsPath" Value="$(VSToolsPath)" />
 		<Message Text="Current Environemnt Dump" />
 		<Exec Command="set" IgnoreExitCode="True" />
 	</Target>
