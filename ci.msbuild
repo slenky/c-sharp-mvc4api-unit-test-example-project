@@ -36,7 +36,7 @@
 	<!-- The Compile Target -->
 	<Target Name="Compile" DependsOnTargets="Clean;LoadNuGetPackages">
 		<Message Importance="high" Text="Compiling core projects" />
-		<MSBuild Projects="$(SrcPath)\MvcApplicationTest.sln" />	 
+		<MSBuild Projects="$(SrcPath)\MvcApplicationTest.sln" Properties="VSToolsPath=$(VSToolsPath)" />	 
 	</Target>
 
 	<!-- The Jenkins Target -->
