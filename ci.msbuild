@@ -48,15 +48,12 @@
 		<Exec Command="&quot;$(SrcPath)\.nuget\nuget.exe&quot; restore $(SrcPath)\MvcApplicationTest.sln" />
 		<!-- Exec Command="&quot;$(SrcPath)\.nuget\nuget.exe&quot; install &quot;%(NuGetPackageConfigs.Identity)&quot; -o &quot;$(SrcPath)\packages&quot;" / -->
 	</Target>
-	
-	<Target Name="VSPath" BeforeTargets="Compile">
-  		<SetEnvironmentVariableTask Name="VSToolsPath" Value="$(VSToolsPath)" />
-	</Target>
 
 	<!-- The Compile Target -->
 	<Target Name="Compile" DependsOnTargets="Clean;LoadNuGetPackages">
 		<Message Importance="high" Text="Compiling core projects" />
-		<MSBuild Projects="$(SrcPath)\MvcApplicationTest.sln" />	 
+		<SetEnvironmentVariableTask Name="VSToolsPath" Value="$(VSToolsPath)" />
+		<MSBuild Projects="$(SrcPath)\MvcApplicationTest.sln" />
 	</Target>
 
 	<!-- The Jenkins Target -->
