@@ -1,0 +1,51 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+                 DefaultTargets="Compile">
+    <PropertyGroup>
+        <Configuration>Debug</Configuration>
+        <Platform>AnyCPU</Platform>
+        <DefineSolutionProperties>false</DefineSolutionProperties>
+ 
+	<ReferencePath>$(ReferencePath);$(SrcPath)\packages</ReferencePath>
+
+        <!-- General Paths -->
+        <RootPath>$(MSBuildProjectDirectory)</RootPath>
+        <SrcPath>$(RootPath)</SrcPath>
+        <Packages>$(SrcPath)\packages</Packages>
+
+	<AssemblySearchPaths>$(Packages)\**\*.dll;$(AssemblySearchPaths)</AssemblySearchPaths>
+    </PropertyGroup>
+    
+    <!-- The Clean Target -->
+    <ItemGroup>
+        <ProjectFiles Include="**\*.csproj" />
+    </ItemGroup>
+
+    <Target Name="Clean">
+        <!-- Clean the source code projects -->
+        <MSBuild Projects="@(ProjectFiles)"
+                         ContinueOnError="false"
+                         Targets="Clean"
+                         Properties="Configuration=$(Configuration)" />
+    </Target>
+    
+    <!-- The LoadNuGetPackages Target -->
+    <ItemGroup>
+        <NuGetPackageConfigs Include="$(MSBuildStartupDirectory)\**\packages.config" />
+    </ItemGroup>
+
+    <Target Name="LoadNuGetPackages">
+        <Message Importance="high" Text="Retrieving packages for %(NuGetPackageConfigs.Identity)" />
+        <Exec Command="&quot;$(SrcPath)\.nuget\nuget.exe&quot; restore $(SrcPath)\MvcApplicationTest.sln" />
+        <!-- Exec Command="&quot;$(SrcPath)\.nuget\nuget.exe&quot; install &quot;%(NuGetPackageConfigs.Identity)&quot; -o &quot;$(SrcPath)\packages&quot;" / -->
+    </Target>
+    
+    <!-- The Compile Target -->
+    <Target Name="Compile" DependsOnTargets="Clean;LoadNuGetPackages">
+        <Message Importance="high" Text="Compiling core projects"/>
+        <MSBuild Projects="$(SrcPath)\MvcApplicationTest.sln"/>     
+    </Target>
+
+    <!-- The Jenkins Target -->
+    <Target Name="Jenkins" DependsOnTargets="Compile">
+    </Target>
+</Project>
