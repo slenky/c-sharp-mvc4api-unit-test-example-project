@@ -52,11 +52,15 @@
 	<!-- The Compile Target -->
 	<Target Name="Compile" DependsOnTargets="Clean;LoadNuGetPackages">
 		<Message Importance="high" Text="Compiling core projects" />
-		<SetEnvironmentVariableTask Name="VSToolsPath" Value="$(VSToolsPath)" />
 		<MSBuild Projects="$(SrcPath)\MvcApplicationTest.sln" />
 	</Target>
 
 	<!-- The Jenkins Target -->
 	<Target Name="Jenkins" DependsOnTargets="LoadNuGetPackages;Clean;Compile">
+	</Target>
+	<Target Name="SetEnvironmentVariables" BeforeTargets="Clean; Compile">
+		<SetEnvironmentVariableTask Name="VSToolsPath" Value="$(VSToolsPath)" />
+		<Message Text="Current Environemnt Dump" />
+		<Exec Command="set" IgnoreExitCode="True" />
 	</Target>
 </Project>
