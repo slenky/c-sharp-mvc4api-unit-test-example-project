@@ -8,7 +8,7 @@ The following must be run using the `Developer Command Prompt for VS2013` or by 
 
 To build the project:
 
-	msbuild
+	msbuild ci.build /t:Jenkins
 
 To test the project (Must be built first):
     	
