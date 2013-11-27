@@ -8,6 +8,12 @@
 		<RootPath>$(MSBuildProjectDirectory)</RootPath>
 		<SrcPath>$(RootPath)</SrcPath>
 		<Packages>$(SrcPath)\packages</Packages>
+		
+		<TestAssemblyOutputDir>$(SrcPath)\MvcApplicationTest.Tests\bin\$(Configuration)\MvcApplicationTest.Tests.dll</TestAssemblyOutputDir>
+		
+		<MyProgramFiles>$(ProgramW6432)</MyProgramFiles>
+      	<MyProgramFiles Condition="$(MyProgramFiles) == ''">$(ProgramFiles)</MyProgramFiles>
+      	<MyProgramFiles Condition="$(MyProgramFiles) == ''">C:\Program Files\</MyProgramFiles>
 	</PropertyGroup>
 
 	<!-- The Clean Target -->
@@ -37,7 +43,13 @@
 		<MSBuild Projects="$(SrcPath)\MvcApplicationTest.sln" />
 	</Target>
 
+	<Target Name="CodeCoverage" DependsOnTargets="Compile">
+		<Message Importance="high" Text="Attempting VS 2013 Code Coverage via VSTest.console.exe" />
+		<Message Importance="normal" Text="Failure of this target in no way should hinder the build." />
+		<Exec IgnoreExitCode="True" ContinueOnError="True" command="&quot;$(SrcPath)\.jenkinskit\JenkinsKit.exe&quot; codecoverage &quot;$(TestAssemblyOutputDir)&quot; &quot;$(SrcPath)\Coverage.xml&quot;" />
+	</Target>
+
 	<!-- The Jenkins Target -->
-	<Target Name="Jenkins" DependsOnTargets="LoadNuGetPackages;Clean;Compile">
+	<Target Name="Jenkins" DependsOnTargets="LoadNuGetPackages;Clean;Compile;CodeCoverage">
 	</Target>
 </Project>
