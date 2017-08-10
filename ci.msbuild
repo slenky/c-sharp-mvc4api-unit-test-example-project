@@ -42,30 +42,17 @@
 	<Target Name="Compile" DependsOnTargets="Clean;LoadNuGetPackages">
 		<Message Importance="high" Text="Compiling core projects" />
 		<MSBuild Projects="$(SrcPath)\MvcApplicationTest.sln" />
+		<MakeDir Directories="$(Artifacts)"/>
 	</Target>
 
 	<Target Name="CodeCoverage" DependsOnTargets="Compile">
 		<Message Importance="high" Text="Attempting VS 2013 Code Coverage via VSTest.console.exe" />
 		<Message Importance="normal" Text="Failure of this target in no way should hinder the build." />
-		<Exec IgnoreExitCode="True" ContinueOnError="True" command="&quot;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\mstest.exe&quot; /resultsfile:&quot;$(TestAssemblyOutputDir)TestResult.trx&quot; /testcontainer:&quot;$(SrcPath)\MvcApplicationTest.Tests\bin\Debug\MvcApplicationTest.Tests.dll&quot;" />
+		<Exec IgnoreExitCode="True" ContinueOnError="True" command="&quot;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\mstest.exe&quot; /resultsfile:&quot;$(TestAssemblyOutputDir).TestResult.trx&quot; /testcontainer:&quot;$(SrcPath)\MvcApplicationTest.Tests\bin\Debug\MvcApplicationTest.Tests.dll&quot;" />
 	</Target>
 
 	
-	<Target Name="CreateNightlyZip">
-    	<PropertyGroup>
-      		<StringDate>$([System.DateTime]::Now.ToString('yyyyMMdd'))</StringDate>
-    	</PropertyGroup>
-	<ItemGroup>
-    		<ReleaseApplicationFiles Include="$(SrcPath)\MvcApplicationTest\obj\Release\*.*" />
-  	</ItemGroup>
-    	<MakeDir Directories="$(Artifacts)"/>
-    	<Zip Files="@(ReleaseApplicationFiles)"
-      		WorkingDirectory="$(SrcPath)"
-      		ZipFileName="$(Artifacts)\$(StringDate)_ExampleProject.zip"
-      		ZipLevel="9" />
-	</Target>
-	
 	<!-- The Jenkins Target -->
-	<Target Name="Jenkins" DependsOnTargets="LoadNuGetPackages;Clean;Compile;CodeCoverage;CreateNightlyZip">
+	<Target Name="Jenkins" DependsOnTargets="LoadNuGetPackages;Clean;Compile;CodeCoverage">
 	</Target>
 </Project>
