@@ -61,13 +61,13 @@ End If
 
 '-- Database stuff showed up
 tstime = timer
-WScript.StdOut.WriteLine("Testing: Genre content from DB present")
-Regex.Pattern = "<a href=""(/[^""]*)/Store/Browse\?Genre=[^""]+"">"
+WScript.StdOut.WriteLine("Testing: Getting started content present")
+Regex.Pattern = "<section class="content-wrapper main-content clear-fix">"
 Set matches = Regex.Execute(content)
 If matches.count = 0 Then
-	testResults.AddTestResult "Genre Content", False, "Couldn't locate genre links on home screen", timer - tstime
+testResults.AddTestResult "Content", False, "Couldn't locate getting started on home screen", timer - tstime
 Else
-	testResults.AddTestResult "Genre Content", True, "", timer - tstime
+	testResults.AddTestResult "Content", True, "", timer - tstime
 End If
 
 '-- Output
