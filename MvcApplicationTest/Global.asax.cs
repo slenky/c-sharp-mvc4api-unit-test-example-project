@@ -22,6 +22,26 @@ namespace MvcApplicationTest
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            
+            StoreBuildVersion();
+        }
+        
+        protected void StoreBuildVersion() 
+        {
+            FileInfo fnfo = new FileInfo(Server.MapPath("~/Content/Buildversion.txt"));
+            if (!fnfo.Exists) {
+                Application["BuildVersion"] = "Unknown(1)";
+            }
+            else {
+                try {
+                    using (StreamReader sr = fnfo.OpenText()) {
+                    Application["BuildVersion"] = sr.ReadToEnd();
+                }
+            }
+            catch {
+                Application["BuildVersion"] = "Unknown(2)";
+            }    
+            }
         }
     }
 }
