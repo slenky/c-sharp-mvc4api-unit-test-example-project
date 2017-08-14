@@ -62,7 +62,7 @@ End If
 '-- Database stuff showed up
 tstime = timer
 WScript.StdOut.WriteLine("Testing: Getting started content present")
-Regex.Pattern = "<section class="content-wrapper main-content clear-fix">"
+Regex.Pattern = "<section class=""content-wrapper main-content clear-fix"">"
 Set matches = Regex.Execute(content)
 If matches.count = 0 Then
 testResults.AddTestResult "Content", False, "Couldn't locate getting started on home screen", timer - tstime
