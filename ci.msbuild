@@ -48,7 +48,7 @@
 	<Target Name="CodeCoverage" DependsOnTargets="Compile">
 		<Message Importance="high" Text="Attempting VS 2013 Code Coverage via VSTest.console.exe" />
 		<Message Importance="normal" Text="Failure of this target in no way should hinder the build." />
-		<Exec IgnoreExitCode="True" ContinueOnError="True" command="&quot;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\mstest.exe&quot; /resultsfile:&quot;$(TestAssemblyOutputDir).TestResult.trx&quot; /testcontainer:&quot;$(SrcPath)\MvcApplicationTest.Tests\bin\Debug\MvcApplicationTest.Tests.dll&quot;" />
+		<Exec IgnoreExitCode="True" ContinueOnError="True" command="&quot;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\mstest.exe&quot; /resultsfile:&quot;$(TestAssemblyOutputDir).TestResult.trx&quot; /testcontainer:&quot;$(SrcPath)\MvcApplicationTest.Tests\bin\Release\MvcApplicationTest.Tests.dll&quot;" />
 	</Target>
 
 	
