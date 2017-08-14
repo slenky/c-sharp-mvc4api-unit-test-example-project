@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -29,7 +29,7 @@ namespace MvcApplicationTest
         
         protected void StoreBuildVersion() 
         {
-            FileInfo fnfo = new FileInfo(Server.MapPath("~/Content/Buildversion.txt"));
+            FileInfo fnfo = new FileInfo(Server.MapPath("~/Content/buildVersion.txt"));
             if (!fnfo.Exists) {
                 Application["BuildVersion"] = "Unknown(1)";
             }
