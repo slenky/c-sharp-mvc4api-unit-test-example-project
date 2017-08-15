@@ -4,7 +4,7 @@
 		<Platform>AnyCPU</Platform>
 		<DefineSolutionProperties>false</DefineSolutionProperties>
 
-		<!-- General Paths -->
+		<!-- General Paths --> 
 		<RootPath>$(MSBuildProjectDirectory)</RootPath>
 		<SrcPath>$(RootPath)</SrcPath>
 		<Packages>$(SrcPath)\packages</Packages>
