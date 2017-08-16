@@ -53,6 +53,6 @@
 
 	
 	<!-- The Jenkins Target -->
-	<Target Name="Jenkins" DependsOnTargets="LoadNuGetPackages;Clean;Compile;CodeCoverage">
+	<Target Name="Jenkins" DependsOnTargets="LoadNuGetPackages;Clean;Compile">
 	</Target> 
 </Project>
