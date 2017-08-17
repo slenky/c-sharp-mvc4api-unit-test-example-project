@@ -1,5 +1,5 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Compile" ToolsVersion="4.0" VisualStudioVersion="12.0">
-	<PropertyGroup> 
+	<PropertyGroup>   
 		<Configuration>Debug</Configuration>
 		<Platform>AnyCPU</Platform>
 		<DefineSolutionProperties>false</DefineSolutionProperties>
