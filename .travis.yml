@@ -2,4 +2,4 @@ language: csharp
 solution: ci.msbuild
 install:
   - sudo apt-get install -y gtk-sharp2
-  - nuget restore MvcApplicationTest.sln
+  - nuget restore MvcApplicationTest.sln 
