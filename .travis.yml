@@ -2,14 +2,22 @@ sudo: required
 dist: trusty
 language: csharp
 solution: MvcApplicationTest.sln
+branches:
+  only:
+  - testing
+cache:
+  directories:
+  - packages
 mono:
   - beta
 dotnet: 1.0.3
 
 install:
   - curl -L -o nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
-  - mono nuget.exe restore MvcApplicationTest.sln
   - dotnet restore MvcApplicationTest.sln
+  - mono nuget.exe restore MvcApplicationTest.sln
+  - mono nuget.exe install NUnit.Runners -Version 3.7.0 -OutputDirectory testrunner
 
 script:
-  - msbuild /t:Jenkins ci.msbuild
+  - msbuild /t:TravisCI ci.msbuild
+  - mono ./testrunner/NUnit.ConsoleRunner.3.7.0/tools/nunit3-console.exe ./MvcApplicationTest.Tests/bin/Debug/MvcApplicationTest.Tests.dll
