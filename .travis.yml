@@ -1,5 +1,7 @@
 language: csharp
-solution: ci.msbuild
 sudo: required
 install:
+  - sudo apt-get install mono-devel mono-gmcs nunit-console
+script:
   - nuget restore MvcApplicationTest.sln
+  - xbuild ci.build /P:Configuration=Release
