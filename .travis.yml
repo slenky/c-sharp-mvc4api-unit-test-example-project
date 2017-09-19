@@ -2,7 +2,9 @@ sudo: required
 dist: trusty
 language: csharp
 solution: MvcApplicationTest.sln
-cache: packages
+cache:
+  directories:
+  - packages
 mono:
   - beta
 dotnet: 1.0.3
