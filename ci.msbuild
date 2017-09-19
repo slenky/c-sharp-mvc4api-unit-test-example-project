@@ -50,9 +50,10 @@
 		<Message Importance="normal" Text="Failure of this target in no way should hinder the build." />
 		<Exec IgnoreExitCode="True" ContinueOnError="True" command="&quot;C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\mstest.exe&quot; /resultsfile:&quot;$(TestAssemblyOutputDir).TestResult.trx&quot; /testcontainer:&quot;$(SrcPath)\MvcApplicationTest.Tests\bin\Release\MvcApplicationTest.Tests.dll&quot;" />
 	</Target>
-
 	
 	<!-- The Jenkins Target -->
-	<Target Name="Jenkins" DependsOnTargets="LoadNuGetPackages;Clean;Compile">
+	<Target Name="Jenkins" DependsOnTargets="Clean;Compile">
 	</Target> 
+	<Target Name="TravisCI" DependsOnTargets="Clean;Compile">
+	</Target> 	
 </Project>
