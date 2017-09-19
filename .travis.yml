@@ -14,5 +14,4 @@ install:
 
 script:
   - msbuild /t:TravisCI ci.msbuild
-  - mono ./testrunner/NUnit.ConsoleRunner.3.7.0/tools/nunit3-console.exe ./MvcApplicationTest.Tests/bin/Release/MvcApplicationTest.Tests.dll
-
+  - mono ./testrunner/NUnit.ConsoleRunner.3.7.0/tools/nunit3-console.exe ./MvcApplicationTest.Tests/bin/Debug/MvcApplicationTest.Tests.dll
