@@ -11,4 +11,4 @@ install:
   - dotnet restore MvcApplicationTest.sln
 
 script:
-  - msbuild /t:Jenkins ci.build
+  - msbuild /t:Jenkins ci.msbuild
