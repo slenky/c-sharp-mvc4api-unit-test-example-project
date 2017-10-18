@@ -3,7 +3,7 @@
 C# MVC 4 API Unit Test Example Project for Jenkins Demo Job
 =========================================
 
-To build the project:
+To build the project: 
 ```
 msbuild ci.build /t:Jenkins
 ```
